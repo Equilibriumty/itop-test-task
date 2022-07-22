@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CurrencySelection } from './components/CurrencySelection/CurrencySelection';
 import { Header } from './components/Header/Header';
 import { useCurrencyRates } from './hooks/useCurrencyRates';
-import { Currencies } from './types/responseType';
+import { Currencies, CurrencySigns } from './types/responseType';
 import { calculateRates, roundRate } from './utils/utils';
 import './App.css';
 
@@ -11,10 +11,10 @@ function App() {
   const [amountSecond, setAmountSecond] = useState<number>(1);
 
   const [selectedFirstCurrency, setSelectedFirstCurrency] =
-    useState<keyof typeof Currencies>('UAH');
+    useState<CurrencySigns>('UAH');
 
   const [selectedSecondCurrency, setSelectedSecondCurrency] =
-    useState<keyof typeof Currencies>('EUR');
+    useState<CurrencySigns>('EUR');
 
   const { data, error, loading } = useCurrencyRates();
 
@@ -24,9 +24,7 @@ function App() {
   const rates = data.rates;
   const currencySignatures = Object.keys(rates);
 
-  const handleFirstCurrencySelect = (
-    selectedFirstCurrency: keyof typeof Currencies
-  ) => {
+  const handleFirstCurrencySelect = (selectedFirstCurrency: CurrencySigns) => {
     setAmountSecond(
       roundRate(
         (amountFirst * rates[selectedSecondCurrency]) /
@@ -37,7 +35,7 @@ function App() {
   };
 
   const handleSecondCurrencySelect = (
-    selectedSecondCurrency: keyof typeof Currencies
+    selectedSecondCurrency: CurrencySigns
   ) => {
     setAmountSecond(
       roundRate(

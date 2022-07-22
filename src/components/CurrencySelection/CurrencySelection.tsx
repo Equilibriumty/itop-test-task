@@ -1,11 +1,12 @@
-import { Currencies } from '../../types/responseType';
+import React from 'react';
+import { CurrencySigns } from '../../types/responseType';
 import styles from './CurrencySelection.module.css';
 
 interface CurrencySelectionProps {
-  selectedCurrency: keyof typeof Currencies;
+  selectedCurrency: CurrencySigns;
   currencies: string[];
   amount: number;
-  onAmountChange: (e: any) => void;
+  onAmountChange: (e: number) => void;
   onSelectChange: (e: any) => void;
 }
 
@@ -16,17 +17,22 @@ export const CurrencySelection = ({
   onAmountChange,
   onSelectChange,
 }: CurrencySelectionProps) => {
-  const handleSelectChange = (e: any) => {
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onSelectChange(e.target.value);
   };
 
-  const handleAmountChange = (e: any) => {
-    onAmountChange(e.target.value);
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onAmountChange(Number(e.target.value));
   };
 
   return (
     <div className={styles.contentCurrency}>
-      <input type='number' value={amount} onChange={handleAmountChange} />
+      <input
+        type='number'
+        min='0'
+        value={amount}
+        onChange={handleAmountChange}
+      />
       <select value={selectedCurrency} onChange={handleSelectChange}>
         {currencies.map((currency) => (
           <option key={currency} value={currency}>

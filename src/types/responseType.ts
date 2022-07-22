@@ -4,10 +4,12 @@ export enum Currencies {
   EUR = 'EUR',
 }
 
-export interface CurrencyResponse {
+export type CurrencyResponse = {
   success: boolean;
   timestamp: number;
   base: string;
   date: string;
   rates: Record<string, number>;
-}
+};
+
+export type CurrencySigns = keyof typeof Currencies;
