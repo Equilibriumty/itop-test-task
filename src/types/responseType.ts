@@ -5,15 +5,9 @@ export enum Currencies {
 }
 
 export interface CurrencyResponse {
-  date: string;
-  info: {
-    rate: number;
-    timestamp: number;
-  };
-  query: {
-    amount: number;
-    from: keyof typeof Currencies;
-  };
-  result: number;
   success: boolean;
+  timestamp: number;
+  base: string;
+  date: string;
+  rates: Record<string, number>;
 }

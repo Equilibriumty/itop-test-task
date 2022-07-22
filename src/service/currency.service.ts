@@ -10,20 +10,16 @@ export class CurrencyService {
     this.apiKey = process.env.REACT_APP_API_KEY ?? '';
   }
 
-  private getFullApiUrl(to: string, from: string, amount: string) {
-    return `${this.baseUrl}to=${to}&from=${from}&amount=${amount}`;
+  private getFullApiUrl() {
+    return `${this.baseUrl}`;
   }
 
-  async get<T>(to: string, from: string, amount: number): Promise<T> {
-    const res = await this.fetchingService.get<T>(
-      this.getFullApiUrl(to, from, String(amount)),
-      {
-        headers: { apikey: this.apiKey },
-      }
-    );
+  async get<T>(): Promise<T> {
+    const response = await this.fetchingService.get<T>(this.getFullApiUrl(), {
+      headers: { apikey: this.apiKey },
+    });
 
-    return res.data;
+    return response.data;
   }
 }
-const currencyService = new CurrencyService();
-export default currencyService;
+export const currencyService = new CurrencyService();

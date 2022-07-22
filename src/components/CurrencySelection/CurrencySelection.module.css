@@ -1,0 +1,33 @@
+.content-currency {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 1000px;
+}
+
+input,
+select {
+  color: white;
+  background: none;
+  border: 1;
+  border-color: #8167a3;
+  margin: 10px;
+  font-family: 'Inter';
+  height: 40px;
+  border-radius: 10px;
+}
+
+input {
+  padding-left: 20px;
+  margin: 10px;
+}
+
+select {
+  padding: 10px;
+  padding-right: 10px;
+}
+
+select option {
+  color: white;
+  background: #241636;
+}
