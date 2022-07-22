@@ -1,5 +1,5 @@
 import { Currencies } from '../../types/responseType';
-import './CurrencySelection.module.css';
+import styles from './CurrencySelection.module.css';
 
 interface CurrencySelectionProps {
   selectedCurrency: keyof typeof Currencies;
@@ -25,8 +25,8 @@ export const CurrencySelection = ({
   };
 
   return (
-    <div className='content-currency'>
-      <input type='text' value={amount} onChange={handleAmountChange} />
+    <div className={styles.contentCurrency}>
+      <input type='number' value={amount} onChange={handleAmountChange} />
       <select value={selectedCurrency} onChange={handleSelectChange}>
         {currencies.map((currency) => (
           <option key={currency} value={currency}>

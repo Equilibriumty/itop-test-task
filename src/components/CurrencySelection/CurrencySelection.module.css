@@ -1,19 +1,20 @@
-.content-currency {
+.contentCurrency {
   display: flex;
   justify-content: center;
-  margin: auto;
-  width: 1000px;
+  align-items: center;
+  height: 10vh;
+  margin-top: 100px;
 }
 
 input,
 select {
   color: white;
   background: none;
-  border: 1;
   border-color: #8167a3;
   margin: 10px;
+  height: 50px;
+
   font-family: 'Inter';
-  height: 40px;
   border-radius: 10px;
 }
 

@@ -21,16 +21,16 @@ function App() {
   if (error) {
     return <div>Error</div>;
   }
-
-  const currencies = Object.keys(data);
+  const rates = data.rates;
+  const currencySignatures = Object.keys(rates);
 
   const handleFirstCurrencySelect = (
     selectedFirstCurrency: keyof typeof Currencies
   ) => {
     setAmountSecond(
       roundRate(
-        (amountFirst * data[selectedSecondCurrency]) /
-          data[selectedFirstCurrency]
+        (amountFirst * rates[selectedSecondCurrency]) /
+          rates[selectedFirstCurrency]
       )
     );
     setSelectedFirstCurrency(selectedFirstCurrency);
@@ -41,8 +41,8 @@ function App() {
   ) => {
     setAmountSecond(
       roundRate(
-        (amountSecond * data[selectedFirstCurrency]) /
-          data[selectedSecondCurrency]
+        (amountSecond * rates[selectedFirstCurrency]) /
+          rates[selectedSecondCurrency]
       )
     );
     setSelectedSecondCurrency(selectedSecondCurrency);
@@ -51,8 +51,8 @@ function App() {
   const handleFirstAmountChange = (amountFirst: number) => {
     setAmountSecond(
       roundRate(
-        (amountFirst * data[selectedSecondCurrency]) /
-          data[selectedFirstCurrency]
+        (amountFirst * rates[selectedSecondCurrency]) /
+          rates[selectedFirstCurrency]
       )
     );
     setAmountFirst(amountFirst);
@@ -61,8 +61,8 @@ function App() {
   const handleSecondAmountChange = (amountSecond: number) => {
     setAmountFirst(
       roundRate(
-        (amountSecond * data[selectedFirstCurrency]) /
-          data[selectedSecondCurrency]
+        (amountSecond * rates[selectedFirstCurrency]) /
+          rates[selectedSecondCurrency]
       )
     );
     setAmountSecond(amountSecond);
@@ -74,23 +74,26 @@ function App() {
       ) : (
         <>
           <Header
-            euroRate={calculateRates(data, Currencies.EUR)}
-            dollarRate={calculateRates(data, Currencies.USD)}
+            euroRate={calculateRates(rates, Currencies.EUR)}
+            dollarRate={calculateRates(rates, Currencies.USD)}
+            date={data.timestamp}
           />
-          <CurrencySelection
-            onAmountChange={handleFirstAmountChange}
-            onSelectChange={handleFirstCurrencySelect}
-            amount={amountFirst}
-            selectedCurrency={selectedFirstCurrency}
-            currencies={currencies}
-          />
-          <CurrencySelection
-            onAmountChange={handleSecondAmountChange}
-            onSelectChange={handleSecondCurrencySelect}
-            amount={amountSecond}
-            selectedCurrency={selectedSecondCurrency}
-            currencies={currencies}
-          />
+          <div className='mainContent'>
+            <CurrencySelection
+              onAmountChange={handleFirstAmountChange}
+              onSelectChange={handleFirstCurrencySelect}
+              amount={amountFirst}
+              selectedCurrency={selectedFirstCurrency}
+              currencies={currencySignatures}
+            />
+            <CurrencySelection
+              onAmountChange={handleSecondAmountChange}
+              onSelectChange={handleSecondCurrencySelect}
+              amount={amountSecond}
+              selectedCurrency={selectedSecondCurrency}
+              currencies={currencySignatures}
+            />
+          </div>
         </>
       )}
     </div>

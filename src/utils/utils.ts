@@ -3,7 +3,7 @@ export const calculateRates = (
 
   currency: string
 ) => {
-  return (1 * data['UAH']) / data[currency];
+  return roundRate((1 * data['UAH']) / data[currency]);
 };
 
 export const roundRate = (rate: number) => {

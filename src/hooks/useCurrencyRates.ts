@@ -3,7 +3,13 @@ import { currencyService } from '../service/currency.service';
 import { CurrencyResponse } from '../types/responseType';
 
 export const useCurrencyRates = () => {
-  const [data, setData] = useState<{ [x: string]: number }>({});
+  const [data, setData] = useState<CurrencyResponse>({
+    success: false,
+    timestamp: 0,
+    base: '',
+    date: '',
+    rates: {},
+  });
   const [error, setError] = useState<unknown>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -12,7 +18,7 @@ export const useCurrencyRates = () => {
       try {
         setLoading(true);
         const response = await currencyService.get<CurrencyResponse>();
-        setData(response.rates);
+        setData({ ...response });
       } catch (err) {
         setError(err);
       } finally {
